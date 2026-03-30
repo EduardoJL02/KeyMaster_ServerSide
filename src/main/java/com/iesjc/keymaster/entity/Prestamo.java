@@ -3,6 +3,7 @@ package com.iesjc.keymaster.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "prestamo")
@@ -23,6 +24,9 @@ public class Prestamo {
 
     @Column(name = "fecha_entrada")
     private LocalDateTime fechaEntrada;
+
+    @Column(name = "fecha_limite")
+    private LocalTime fechaLimite;
 
     // Relación Muchos a Uno: Muchos préstamos se hacen sobre una misma llave (historial)
     @ManyToOne(fetch = FetchType.LAZY)

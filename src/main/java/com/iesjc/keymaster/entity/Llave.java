@@ -31,4 +31,9 @@ public class Llave {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Espacio espacio;
+
+    // Campo de version para evitar concurrencia de prestamos
+    @Version
+    @Column(name = "version")
+    private Long version;
 }

@@ -22,4 +22,7 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Integer> {
     // Devuelve el historial de una llave ordenado desde el más reciente
     @Query("SELECT p FROM Prestamo p WHERE p.llave.idLlave = :idLlave ORDER BY p.fechaSalida DESC")
     List<Prestamo> findHistorialByLlave(@Param("idLlave") Integer idLlave);
+
+    // Para la tabla "Actividad Reciente" del Dashboard
+    List<Prestamo> findTop20ByOrderByFechaSalidaDesc();
 }
