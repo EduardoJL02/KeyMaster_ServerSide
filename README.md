@@ -41,13 +41,13 @@ El proyecto sigue una arquitectura estricta para garantizar un código limpio, m
 
 ## Stack Tecnológico
 
-| Entorno | Tecnologías | Herramientas Clave |
-| :--- | :--- | :--- |
-| **Frontend** | Java 17, JavaFX 19+ | Scene Builder, ControlsFX, Ikonli (Iconos) |
-| **Backend** | Java 17, Spring Boot 3+ | Spring Web, Spring Security, Spring Data JPA, Hibernate |
-| **Base de Datos** | MySQL 8.0 | MySQL Workbench |
-| **Reportes** | JasperReports, PDF.js | Generación de PDFs y exportación a Excel/CSV |
-| **Testing & QA**| JUnit 5, Mockito | Pruebas unitarias y de integración |
+| Entorno           | Tecnologías             | Herramientas Clave                                      |
+|:------------------|:------------------------|:--------------------------------------------------------|
+| **Frontend**      | Java 17, JavaFX 19+     | Scene Builder, ControlsFX, Ikonli (Iconos)              |
+| **Backend**       | Java 17, Spring Boot 3+ | Spring Web, Spring Security, Spring Data JPA, Hibernate |
+| **Base de Datos** | MySQL 8.0               | MySQL Workbench                                         |
+| **Reportes**      | JasperReports, PDF.js   | Generación de PDFs y exportación a Excel/CSV            |
+| **Testing & QA**  | JUnit 5, Mockito        | Pruebas unitarias y de integración                      |
 
 ## Instalación y Ejecución
 
@@ -81,6 +81,6 @@ El proyecto sigue una arquitectura estricta para garantizar un código limpio, m
 
 **Eduardo Jiménez Linares**
 * Estudiante de 2º DAM - IES San Juan de la Cruz
-* https://github.com/EduardoJL02
+* [GitHub Profile](https://github.com/EduardoJL02)
 ---
 *Proyecto Intermodular desarrollado para la convocatoria académica 2025/2026.*

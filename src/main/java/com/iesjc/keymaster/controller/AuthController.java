@@ -4,27 +4,25 @@ import com.iesjc.keymaster.dto.request.LoginRequestDTO;
 import com.iesjc.keymaster.dto.response.LoginResponseDTO;
 import com.iesjc.keymaster.entity.Usuario;
 import com.iesjc.keymaster.repository.UsuarioRepository;
-// Nota: JwtService lo crearemos en el próximo paso de seguridad
-// import com.iesjc.keymaster.security.JwtService;
-
+import com.iesjc.keymaster.security.JwtService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-// Habilitamos CORS temporalmente para evitar bloqueos si pruebas con Postman o un cliente externo
 @CrossOrigin(origins = "*")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final UsuarioRepository usuarioRepository;
-    // private final JwtService jwtService; // (Pendiente de crear)
+    private final JwtService jwtService;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO request) {
@@ -39,9 +37,15 @@ public class AuthController {
         Usuario usuario = usuarioRepository.findByUsernameAndActivoTrue(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado tras autenticar"));
 
-        // 3. Generamos el Token JWT (Lógica simulada por ahora hasta crear el JwtService)
-        // String token = jwtService.generateToken(usuario);
-        String token = "jwt_token_simulado_temporalmente";
+        // 3. Generamos el Token JWT
+        UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
+                .username(usuario.getUsername())
+                .password(usuario.getPassword())
+                .roles(usuario.getRol().name())
+                .build();
+
+        // Generación criptográfica
+        String token = jwtService.generateToken(userDetails);
 
         // 4. Construimos el DTO de respuesta que necesita tu JavaFX
         LoginResponseDTO response = LoginResponseDTO.builder()
