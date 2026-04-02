@@ -2,6 +2,7 @@ package com.iesjc.keymaster.service.impl;
 
 import com.iesjc.keymaster.dto.request.PrestamoCreateDTO;
 import com.iesjc.keymaster.entity.*;
+import com.iesjc.keymaster.exception.ResourceNotFoundException;
 import com.iesjc.keymaster.repository.*;
 import com.iesjc.keymaster.service.PrestamoService;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,11 @@ public class PrestamoServiceImpl implements PrestamoService {
 
         // 1. Validar al Usuario (Conserje) que hace la operación
         Usuario conserje = usuarioRepository.findByUsernameAndActivoTrue(usernameConserje)
-                .orElseThrow(() -> new IllegalArgumentException("Conserje no válido o sesión expirada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Conserje no válido o sesión expirada"));
 
         // 2. Validar el Profesor (No podemos prestar a un docente dado de baja)
         Profesor profesor = profesorRepository.findById(request.getIdProfesor())
-                .orElseThrow(() -> new IllegalArgumentException("El profesor seleccionado no existe"));
+                .orElseThrow(() -> new ResourceNotFoundException("El profesor seleccionado no existe"));
 
         if (!profesor.getActivo()) {
             throw new IllegalStateException("El profesor está dado de baja en el sistema");
@@ -37,7 +38,7 @@ public class PrestamoServiceImpl implements PrestamoService {
 
         // 3. Validar la Llave (El núcleo de tu inventario)
         Llave llave = llaveRepository.findById(request.getIdLlave())
-                .orElseThrow(() -> new IllegalArgumentException("La llave seleccionada no existe"));
+                .orElseThrow(() -> new ResourceNotFoundException("La llave seleccionada no existe"));
 
         if (llave.getEstado() != EstadoLlave.DISPONIBLE) {
             throw new IllegalStateException("La llave no está disponible. Estado actual: " + llave.getEstado());
