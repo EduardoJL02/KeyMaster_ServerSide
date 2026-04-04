@@ -8,4 +8,6 @@ public interface PrestamoService {
     PrestamoResponseDTO registrarNuevoPrestamo(PrestamoCreateDTO request, String usernameConserje);
     List<PrestamoResponseDTO> obtenerActivos();
     PrestamoResponseDTO registrarDevolucion(Integer idPrestamo, String usernameConserje);
+    List<PrestamoResponseDTO> obtenerActividadReciente();
+    PrestamoResponseDTO obtenerPrestamoPorId(Integer idPrestamo);
 }

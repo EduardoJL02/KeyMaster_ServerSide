@@ -101,6 +101,22 @@ public class PrestamoServiceImpl implements PrestamoService {
         return mapToDTO(prestamoActualizado);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<PrestamoResponseDTO> obtenerActividadReciente() {
+        return prestamoRepository.findTop20ByOrderByFechaSalidaDesc().stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PrestamoResponseDTO obtenerPrestamoPorId(Integer idPrestamo) {
+        Prestamo prestamo = prestamoRepository.findById(idPrestamo)
+                .orElseThrow(() -> new ResourceNotFoundException("Préstamo no encontrado con ID: " + idPrestamo));
+        return mapToDTO(prestamo);
+    }
+
     // --- MÉTOD0 PRIVADO DE MAPEO E INTELIGENCIA ---
     private PrestamoResponseDTO mapToDTO(Prestamo prestamo) {
         String estadoCalculado = "DEVUELTO";

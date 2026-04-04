@@ -54,4 +54,24 @@ public class PrestamoController {
         PrestamoResponseDTO response = prestamoService.registrarDevolucion(idPrestamo, authentication.getName());
         return ResponseEntity.ok(response);
     }
+
+    /**
+     * ENDPOINT 4: Obtener Actividad Reciente (Para la tabla del Dashboard)
+     * URL: GET http://localhost:8080/api/prestamos/recientes
+     */
+    @GetMapping("/recientes")
+    public ResponseEntity<List<PrestamoResponseDTO>> getActividadReciente() {
+        List<PrestamoResponseDTO> recientes = prestamoService.obtenerActividadReciente();
+        return ResponseEntity.ok(recientes);
+    }
+
+    /**
+     * ENDPOINT 5: Obtener Detalles de un Préstamo (Para el botón "Ojo" de Detalles)
+     * URL: GET http://localhost:8080/api/prestamos/{idPrestamo}
+     */
+    @GetMapping("/{idPrestamo}")
+    public ResponseEntity<PrestamoResponseDTO> getPrestamoPorId(@PathVariable Integer idPrestamo) {
+        PrestamoResponseDTO response = prestamoService.obtenerPrestamoPorId(idPrestamo);
+        return ResponseEntity.ok(response);
+    }
 }
