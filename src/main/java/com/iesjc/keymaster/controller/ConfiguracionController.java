@@ -38,7 +38,9 @@ public class ConfiguracionController {
         byte[] backupBytes = configuracionService.generarBackupBaseDatos();
 
         HttpHeaders headers = new HttpHeaders();
+        // Indicamos que es un archivo para descargar (Octet Stream)
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        // Sugerimos el nombre por defecto del archivo SQL
         headers.setContentDispositionFormData("attachment", "KeyMaster_Backup.sql");
 
         return new ResponseEntity<>(backupBytes, headers, HttpStatus.OK);
