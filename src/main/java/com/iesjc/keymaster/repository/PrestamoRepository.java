@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 //Repositorio de Prestamo
@@ -25,4 +26,7 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Integer> {
 
     // Para la tabla "Actividad Reciente" del Dashboard
     List<Prestamo> findTop20ByOrderByFechaSalidaDesc();
+
+    // Busca los préstamos cuya fecha de salida esté entre dos fechas dadas
+    List<Prestamo> findByFechaSalidaBetweenOrderByFechaSalidaDesc(LocalDateTime inicio, LocalDateTime fin);
 }
